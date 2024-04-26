@@ -20,8 +20,11 @@ Interact with the application by following the prompts.
 
 ## Technologies Used
 ` Node.js
+
 ` MySQL
+
 ` Inquirer
+
 ` Console.table
 
 ## Screenshots
