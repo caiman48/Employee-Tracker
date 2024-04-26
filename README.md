@@ -10,6 +10,10 @@ This command-line application allows business owners to manage their company's d
 
 
 
+https://github.com/caiman48/Employee-Tracker/assets/102683872/5c022cce-2fd2-442f-aab9-04ddeb392e67
+
+
+
 ## Installation
 Clone the repository to your local machine.
 Install dependencies using npm install.
