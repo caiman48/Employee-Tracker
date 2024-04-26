@@ -19,14 +19,17 @@ Run the application using node server.js.
 Interact with the application by following the prompts.
 
 ## Technologies Used
-Node.js
-MySQL
-Inquirer
-Console.table
+` Node.js
+` MySQL
+` Inquirer
+` Console.table
 
 ## Screenshots
+- ![1](https://github.com/caiman48/Employee-Tracker/assets/102683872/1fb73ee1-6a5c-4d89-8b58-022af77e1bb2)
 
+- ![2](https://github.com/caiman48/Employee-Tracker/assets/102683872/c2d5eac2-d98c-4c10-9a35-d5ccfb025a9a)
 
+- ![3](https://github.com/caiman48/Employee-Tracker/assets/102683872/188f987d-707d-47fd-803e-7d21ed73b36e)
 
 ## Credits
 
