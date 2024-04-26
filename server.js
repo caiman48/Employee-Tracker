@@ -1,6 +1,6 @@
-const mysql = require("mysql2/promise");
-const inquirer = require("inquirer");
-const cTable = require("console.table");
+const mysql = require("mysql2/promise");// MySQL library to handle database operations with promises
+const inquirer = require("inquirer");// Library for interactive command line user interfaces
+const cTable = require("console.table");// Library to display tables in the console
 
 // Create a connection to the MySQL database
 const connection = mysql.createConnection({
@@ -13,10 +13,10 @@ const connection = mysql.createConnection({
 // Main function to start the application
 const start = async () => {
     try {
-        const db = await connection;
+        const db = await connection;// Establish and await the database connection
         console.log("Connected to the Team_db database.");
 
-        while (true) {
+        while (true) {// Loop to keep asking the user for actions until they decide to exit
             const { action } = await inquirer.prompt({
                 type: "list",
                 name: "action",
@@ -34,11 +34,11 @@ const start = async () => {
             });
 
             if (action === "Exit") {
-                await db.end();
+                await db.end();// Close the database connection
                 console.log("Connection closed.");
-                break;
+                break;// Exit the loop
             }
-
+// Handle user actions with a switch statement
             switch (action) {
                 case "View all departments":
                     await viewDepartments(db);
@@ -63,18 +63,18 @@ const start = async () => {
                     break;
             }
         }
-    } catch (err) {
+    } catch (err) {// Catch and handle any errors
         console.error("An error occurred:", err);
-        await connection.end();
+        await connection.end();// Ensure connection is closed on error
     }
 };
-
+// Function to display all departments
 const viewDepartments = async (db) => {
     const query = "SELECT id, name AS department FROM departments";
-    const [res] = await db.query(query);
-    console.table(res);
+    const [res] = await db.query(query);// Execute the query and store the result
+    console.table(res);// Display the result in table format in the console
 };
-
+// Function to display all roles
 const viewRoles = async (db) => {
     const query = `SELECT roles.id, roles.title, roles.salary, departments.name AS department 
                                      FROM roles 
@@ -82,7 +82,7 @@ const viewRoles = async (db) => {
     const [res] = await db.query(query);
     console.table(res);
 };
-
+// Function to display all employees
 const viewEmployees = async (db) => {
     const query = `
         SELECT 
@@ -104,7 +104,7 @@ const viewEmployees = async (db) => {
     const [res] = await db.query(query);
     console.table(res);
 };
-
+// Function to add a new department
 const addDepartment = async (db) => {
     const { name } = await inquirer.prompt({
         type: "input",
@@ -116,8 +116,9 @@ const addDepartment = async (db) => {
     await db.query(query, { name });
     console.log("Department added successfully!");
 };
-
+// Function to add a new role to the database
 const addRole = async (db) => {
+    // Prompt user for details about the new role
     const { title, salary, department_id } = await inquirer.prompt([
         {
             type: "input",
@@ -135,13 +136,14 @@ const addRole = async (db) => {
             message: "Enter the department ID for the role:",
         },
     ]);
-
+// SQL query to insert the new role into the database
     const query = "INSERT INTO roles SET ?";
-    await db.query(query, { title, salary, department_id });
-    console.log("Role added successfully!");
+    await db.query(query, { title, salary, department_id });// Execute the query
+    console.log("Role added successfully!");// Confirm the role was added
 };
-
+// Function to add a new employee to the database
 const addEmployee = async (db) => {
+    // Prompt user for details about the new employee
     const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
         {
             type: "input",
@@ -164,13 +166,14 @@ const addEmployee = async (db) => {
             message: "Enter the manager ID for the employee:",
         },
     ]);
-
+// SQL query to insert the new employee into the database
     const query = "INSERT INTO employees SET ?";
     await db.query(query, { first_name, last_name, role_id, manager_id });
     console.log("Employee added successfully!");
 };
-
+// Function to update the role of an existing employee
 const updateEmployeeRole = async (db) => {
+    // Prompt user for the employee ID and new role ID
     const { employee_id, role_id } = await inquirer.prompt([
         {
             type: "input",
@@ -184,9 +187,10 @@ const updateEmployeeRole = async (db) => {
         },
     ]);
 
+// SQL query to update the role ID of the specified employee
     const query = "UPDATE employees SET role_id = ? WHERE id = ?";
-    await db.query(query, [role_id, employee_id]);
-    console.log("Employee role updated successfully!");
+    await db.query(query, [role_id, employee_id]);// Execute the query
+    console.log("Employee role updated successfully!");// Confirm the role update
 };
 
-start();
+start();// Call the start function to run the application
