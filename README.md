@@ -12,6 +12,8 @@ This command-line application allows business owners to manage their company's d
 
 https://github.com/caiman48/Employee-Tracker/assets/102683872/5c022cce-2fd2-442f-aab9-04ddeb392e67
 
+-Link to the vide : https://www.loom.com/share/73033792c20f4f29ab0b05fa62128279?sid=c4dcdb82-a205-4f39-bcf9-983b76dc8d64
+
 
 
 ## Installation
